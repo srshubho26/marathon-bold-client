@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    transition: background 200ms, left 200ms, top 400ms;
+}
+
+body {
+    font-family: "Poppins", serif;
+}
+
+div.swiper-button-prev, div.swiper-button-next{
+    color: #ce0395e9;
+}
+
+/* For add marathon field Date Picker */
+.react-datepicker-wrapper{
+    width: 100%;
+}
+
+/* Marathon page */
+@media only screen and (max-width: 420px){
+    .filter-marathons button span{
+        padding-left: 1px;
+        padding-right: 1px;
+        font-size: 13px;
+    }
+
+    .marathon-pagination ul li button{
+        width: 32px;
+    }
+    
+    .marathon-pagination ul li:first-child button,
+    .marathon-pagination ul li:last-child button{
+        width: auto;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+}
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
