@@ -42,10 +42,34 @@ Marathon Bold is a platform for the people who are passionate about running. We 
 - sweetalert: ^2.1.2
 - swiper: ^11.1.15
 
+## devDependencies
+- @eslint/js: ^9.17.0
+- @types/react: ^18.3.17
+- @types/react-dom: ^18.3.5
+- @vitejs/plugin-react: ^4.3.4
+- autoprefixer: ^10.4.20
+- eslint: ^9.17.0
+- eslint-plugin-react: ^7.37.2
+- eslint-plugin-react-hooks: ^5.0.0
+- eslint-plugin-react-refresh: ^0.4.16
+- globals: ^15.13.0
+- postcss: ^8.4.49
+- tailwindcss: ^3.4.17
+- vite: ^6.0.3
+
 ## Run On Local Machine
 - Run `git clone https://github.com/shuvo22890/marathon-bold-client.git` on your local machine
 - After cloning run `cd marathon-bold-client`
 - Then run `npm install`
+- Create a `.env.local` file on the root of the project and paste the following code
+- `VITE_API_KEY=`
+- `VITE_AUTH_DOMAIN=`
+- `VITE_PROJECT_ID=`
+- `VITE_STORAGE_BUCKET=`
+- `VITE_MESSAGING_SENDER_ID=`
+- `VITE_APP_ID=`
+- Create a firebase project and initiate a web app, email+password and google authentication inside the firebase project
+- Get the project credentials in the firebase app and provide in keys of env file
 - Finally run `npm run dev`
 
 ## Live Link:
