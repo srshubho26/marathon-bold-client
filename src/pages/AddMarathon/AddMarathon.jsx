@@ -1,4 +1,4 @@
-import { Button, Label, Select, Textarea, TextInput } from "flowbite-react";
+import { Label, Select, Textarea, TextInput } from "flowbite-react";
 import { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -75,7 +75,7 @@ const AddMarathon = () => {
             <title>Add New Marathon - MarathonBold</title>
         </Helmet>
 
-        <form className="grid sm:grid-cols-2 gap-5 lg:gap-10 relative sm:p-5 lg:p-10" onSubmit={handleAdd}>
+        <form className="grid sm:grid-cols-2 gap-5 lg:gap-10 relative p-2 sm:p-5 lg:p-10" onSubmit={handleAdd}>
             <Loading loading={loading} />
 
             <div>
@@ -169,7 +169,9 @@ const AddMarathon = () => {
                 <Textarea name="description" placeholder="Description of Marathon" required rows={5} />
             </div>
 
-            <Button className="col-span-full" type="submit">Add</Button>
+            <div className="col-span-full">
+                <button className="px-8 text-lite font-semibold text-xl bg-primary hover:bg-primary-lite rounded-md py-2" type="submit">Add</button>
+            </div>
         </form>
     </section>);
 };

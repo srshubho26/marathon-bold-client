@@ -2,7 +2,7 @@ import { Sidebar } from "flowbite-react";
 import { CiViewList } from "react-icons/ci";
 import { GoChecklist, GoTriangleRight } from "react-icons/go";
 
-import { MdDashboard } from "react-icons/md";
+import { MdDashboard, MdFormatListBulletedAdd } from "react-icons/md";
 import { VscDiffAdded } from "react-icons/vsc";
 import SidebarItem from "./dashboardParts/SidebarItem";
 import { Outlet } from "react-router-dom";
@@ -12,7 +12,7 @@ import { IoHomeOutline } from "react-icons/io5";
 const Dashboard = () => {
     const [isOpen, setIsOpen] = useState(false);
 
-    return (<section className="max-w-screen-xl mx-auto flex pt-1">
+    return (<section className="max-w-screen-xl mx-auto flex">
         <div className={`w-64 fixed bg-gray-50 md:static transition-all border-r md:border-0 border-title dark:border-lite top-0 z-40 md:z-20 h-screen md:h-auto ${isOpen ? "left-0" : "-left-64"}`}>
             <button
                 className="absolute md:hidden -right-6 top-56 w-6 h-14 bg-lite dark:bg-gray-800 border border-l-0 border-title dark:border-lite text-title dark:text-lite text-5xl flex items-center rounded-r-md"
@@ -28,11 +28,15 @@ const Dashboard = () => {
                     </h3>
 
                     <Sidebar.ItemGroup className="pt-10 text-lg uppercase">
-                    <SidebarItem icon={IoHomeOutline} name="Home" to="/dashboard" />
+                        <SidebarItem icon={IoHomeOutline} name="Home" to="/dashboard" />
 
                         <SidebarItem icon={VscDiffAdded} name="Add Marathon" to="/dashboard/add-marathon" />
 
+                        <SidebarItem icon={MdFormatListBulletedAdd} name="Add Blog" to="/dashboard/add-blog" />
+
                         <SidebarItem icon={CiViewList} name="My Marathons" to="/dashboard/my-marathons" />
+
+                        <SidebarItem icon={CiViewList} name="My Blogs" to="/dashboard/my-blogs" />
 
                         <SidebarItem icon={GoChecklist} name="My Applies" to="/dashboard/my-applies" />
                     </Sidebar.ItemGroup>
@@ -40,7 +44,7 @@ const Dashboard = () => {
             </Sidebar>
         </div>
 
-        <div className="grow max-w-full min-h-[450px] md:max-w-[calc(100%-256px)] bg-lite dark:bg-gray-900">
+        <div className="grow max-w-full min-h-screen md:max-w-[calc(100%-256px)] bg-lite dark:bg-gray-900">
             <Outlet />
         </div>
     </section>);

@@ -1,4 +1,4 @@
-import { Button, Card, Label, TextInput } from "flowbite-react";
+import { Card, Label, TextInput } from "flowbite-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import GoogleBtn from "../../components/reusuable/GoogleBtn";
 import Title from "../../components/reusuable/Title";
@@ -7,6 +7,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import swal from "sweetalert";
 import Loading from "../../components/reusuable/Loading";
 import { Helmet } from "react-helmet-async";
+import login from '../../assets/img/login.svg';
 
 const Login = () => {
     const { loginUser, user } = useContext(AuthContext);
@@ -51,7 +52,8 @@ const Login = () => {
             <title>Login - MarathonBold</title>
         </Helmet>
 
-        <Card className="max-w-sm mx-auto relative overflow-hidden">
+        <div className="max-w-screen-xl mx-auto flex-col-reverse md:flex-row flex items-center gap-5 justify-between">
+        <Card className="max-w-sm md:max-w-md w-full relative overflow-hidden">
             <Loading loading={loading} />
 
             <div className="flex">
@@ -72,7 +74,9 @@ const Login = () => {
                     <TextInput name="pass" type="password" placeholder="Enter your password" required />
                 </div>
 
-                <Button type="submit" className="bg-primary">Login</Button>
+                <button className="w-fit text-primary border border-primary bg-transparent hover:bg-primary-lite font-semibold text-lg rounded-lg px-6 py-2 hover:text-lite uppercase">
+                    Login
+                </button>
             </form>
             <Label className="text-desc text-sm sm:text-base">
                 Don&apos;t have an account?
@@ -83,6 +87,11 @@ const Login = () => {
 
             <GoogleBtn setLoading={setLoading} setFormProcessing={setFormProcessing} to={state || "/home"} />
         </Card>
+
+        <div className="w-full max-w-sm md:max-w-xl">
+        <img src={login} alt="" />
+        </div>
+        </div>
     </section>);
 };
 

@@ -7,7 +7,7 @@ const Root = () => {
 
   return (<AuthProvider>
     <Header />
-    <main className="dark:bg-dark pt-[93px]">
+    <main className="dark:bg-dark pt-[82px]">
       <Outlet />
     </main>
     <Footer />

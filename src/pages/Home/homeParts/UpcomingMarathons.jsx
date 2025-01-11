@@ -37,20 +37,16 @@ const UpcomingMarathons = () => {
     return (<section className="py-20 bg-lite dark:bg-gray-900 px-2">
         <Title title="Upcoming Marathons" />
         <div className="max-w-screen-xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
-            {upcomingMarathons.map((marathon, i)=><article key={i} className="bg-white dark:bg-[#0f1523] border flex flex-col justify-between shadow rounded-md overflow-hidden">
-                <h3 className="text-2xl uppercase font-semibold text-primary p-5 pb-0">{marathon.title}</h3>
+            {upcomingMarathons.map((marathon, i) => <article key={i}
+                className="border flex flex-col justify-between border-primary rounded-md overflow-hidden relative">
+                <p className="absolute top-5 left-5 px-3 py-1 bg-primary rounded-full text-lite text-sm">{marathon.availableFrom}</p>
 
-                <div className="text-base text-title dark:text-lite p-5 pt-0">
-                    <p className="my-4 text-desc">{marathon.overview}</p>
-                    
+                <h3 className="text-2xl uppercase font-semibold text-primary pt-16 px-5 pb-2">{marathon.title}</h3>
 
-                    <p className="flex items-center gap-2">
-                        <strong>Available From:</strong>
-                        <span>{marathon.availableFrom}</span>
-                    </p>
-                </div>
+                <p className="text-base text-title dark:text-lite p-5 pt-0">{marathon.overview}</p>
+
             </article>)}
-            
+
         </div>
     </section>);
 };

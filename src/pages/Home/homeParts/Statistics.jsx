@@ -10,6 +10,13 @@ import bgImg from '../../../assets/img/countup_bg.jpg';
 
 const Statistics = () => {
     const [isVisible, setIsVisible] = useState(false);
+    let timeout;
+    const handleVisiblility = (inview)=>{
+        if(timeout)clearTimeout(timeout);
+        timeout = setTimeout(()=>{
+            inview && setIsVisible(true)
+        }, 50);
+    }
     return (<section
     className="px-2 py-20"
             style={{background: `linear-gradient(#1c0014c9, #1c0014f0), url(${bgImg}) no-repeat`, backgroundAttachment: 'fixed',
@@ -18,7 +25,7 @@ const Statistics = () => {
     >
         <Title title="Summary of our short journey" color="text-lite" />
 
-        <Fade delay={50} triggerOnce={true} onVisibilityChange={inview => inview && setIsVisible(true)}>
+        <Fade delay={80} triggerOnce={true} onVisibilityChange={handleVisiblility}>
             <div
             className="max-w-screen-xl mx-auto mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-5 text-center uppercase text-2xl text-lite font-semibold"
             >

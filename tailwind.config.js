@@ -11,6 +11,7 @@ export default {
     extend: {
       colors: {
         "primary": "#ce0395e9",
+        "primary-lite": "#e406a5e9",
         "title": "#1c0014",
         "lite": "#f6f6f6",
         "desc": "#6a6666",

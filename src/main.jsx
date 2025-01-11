@@ -17,20 +17,25 @@ import Apply from './pages/Apply/Apply';
 import Error404 from './pages/Error404/Error404';
 import DashboardHome from './pages/DashboardHome/DashboardHome';
 import { HelmetProvider } from 'react-helmet-async';
+import Blogs from './pages/Blogs/Blogs';
+import AddBlog from './pages/AddBlog/AddBlog';
+import MyBlogs from './pages/MyBlogs/MyBlogs';
+import BlogDetails from './pages/BlogDetails/BlogDetails';
+import Contact from './pages/Contact/Contact';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root/>,
-    errorElement: <Error404/>,
+    element: <Root />,
+    errorElement: <Error404 />,
     children: [
       {
         path: "/",
-        element: <Navigate to="/home"/>
+        element: <Navigate to="/home" />
       },
       {
         path: "/home",
-        element: <Home/>
+        element: <Home />
       },
       {
         path: "/login",
@@ -38,39 +43,59 @@ const router = createBrowserRouter([
       },
       {
         path: "/register",
-        element: <Register/>
+        element: <Register />
       },
       {
         path: "/marathons",
-        element: <Marathons/>
+        element: <Marathons />
+      },
+      {
+        path: "/blogs",
+        element: <Blogs />
       },
       {
         path: "/marathons/:id",
-        element: <PrivateRoute><Details/></PrivateRoute>
+        element: <Details />
+      },
+      {
+        path: "/contact",
+        element: <Contact />
+      },
+      {
+        path: "/blogs/:id",
+        element: <BlogDetails />
       },
       {
         path: "/marathon/apply/:id",
-        element: <PrivateRoute><Apply/></PrivateRoute>
+        element: <PrivateRoute><Apply /></PrivateRoute>
       },
       {
         path: "/dashboard",
-        element: <PrivateRoute><Dashboard/></PrivateRoute>,
+        element: <PrivateRoute><Dashboard /></PrivateRoute>,
         children: [
           {
             path: "/dashboard",
-            element: <DashboardHome/>
+            element: <DashboardHome />
           },
           {
             path: "/dashboard/add-marathon",
-            element: <AddMarathon/>
+            element: <AddMarathon />
+          },
+          {
+            path: "/dashboard/add-blog",
+            element: <AddBlog />
+          },
+          {
+            path: "/dashboard/my-blogs",
+            element: <MyBlogs />
           },
           {
             path: "/dashboard/my-marathons",
-            element: <MyMarathons/>
+            element: <MyMarathons />
           },
           {
             path: "/dashboard/my-applies",
-            element: <MyApplies/>
+            element: <MyApplies />
           }
         ]
       }
@@ -81,7 +106,7 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <HelmetProvider>
-    <RouterProvider router={router} />
+      <RouterProvider router={router} />
     </HelmetProvider>
   </StrictMode>,
 )

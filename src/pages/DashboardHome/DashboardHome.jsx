@@ -11,7 +11,7 @@ import Loading from "../../components/reusuable/Loading";
 import { GoChecklist } from "react-icons/go";
 import { CiViewList } from "react-icons/ci";
 
-const linkClasses = "uppercase text-title dark:text-lite text-sm xl:text-lg inline-flex items-center gap-2 border border-desc rounded-md px-3 py-1 hover:bg-cyan-600 hover:text-lite";
+const linkClasses = "uppercase text-primary hover:text-lite text-sm xl:text-lg inline-flex items-center gap-2 border border-primary rounded-md px-3 py-1 hover:bg-primary";
 
 const DashboardHome = () => {
     const { logOut, user } = useContext(AuthContext);
@@ -41,7 +41,7 @@ const DashboardHome = () => {
         </Helmet>
 
         <h2 className="text-2xl text-title dark:text-lite">Welcome <span className="font-semibold text-primary">{user.displayName}</span></h2>
-        <p className="text-lg text-desc mb-10">Here you can browse your created marathons, create and modify them. You can view your registrations as well. So explore as your wish and do something new and productive.</p>
+        <p className="text-lg text-desc dark:text-lite mb-10">Here you can browse your created marathons, create and modify them. You can view your registrations as well. So explore as your wish and do something new and productive.</p>
 
 <h3 className="text-title dark:text-lite pb-1 border-b border-desc text-xl font-semibold mb-5">Overview</h3>
         <div className="grid justify-center sm:grid-cols-2 gap-3 relative min-h-52">

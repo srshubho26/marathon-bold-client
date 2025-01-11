@@ -1,18 +1,18 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import swal from "sweetalert";
 import Title from "../../components/reusuable/Title";
-import Loading from "../../components/reusuable/Loading";
 import { Dropdown, Pagination } from "flowbite-react";
-import { Helmet } from "react-helmet-async";
-import MarathonCard from "../../components/reusuable/MarathonCard";
+import Loading from "../../components/reusuable/Loading";
+import BlogCard from "../../components/reusuable/BlogCard";
 
-const Marathons = () => {
-    const [marathons, setMarathons] = useState(null);
+const Blogs = () => {
+    const [blogs, setBlogs] = useState(null);
     const [loading, setLoading] = useState(false);
     const [sort, setSort] = useState("");
 
-    const [totalMarathons, setTotalMarathons] = useState(0);
+    const [totalBlogs, setTotalBlogs] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [size, setSize] = useState(8);
     const onPageChange = page => setCurrentPage(page);
@@ -22,14 +22,14 @@ const Marathons = () => {
         const loadWithTotalNumber = async () => {
             setLoading(true);
 
-            if (totalMarathons < 1) {
-                const total = await axios("https://a11-server-weld.vercel.app/total-marathons");
-                setTotalMarathons(total.data.count);
+            if (totalBlogs < 1) {
+                const total = await axios("https://a11-server-weld.vercel.app/total-blogs");
+                setTotalBlogs(total.data.count);
             }
 
-            axios(`https://a11-server-weld.vercel.app/marathons?sort=${sort}&page=${currentPage - 1}&size=${size}`)
+            axios(`https://a11-server-weld.vercel.app/blogs?sort=${sort}&page=${currentPage - 1}&size=${size}`)
                 .then(res => {
-                    setMarathons(res.data);
+                    setBlogs(res.data);
                     setLoading(false);
                 })
                 .catch(() => {
@@ -38,16 +38,16 @@ const Marathons = () => {
                 })
         }
         loadWithTotalNumber();
-    }, [totalMarathons, sort, currentPage, size]);
+    }, [totalBlogs, sort, currentPage, size]);
 
     return (<section className="py-20 px-2">
         <Helmet>
-            <title>All Marathons - MarathonBold</title>
+            <title>Blogs - MarathonBold</title>
         </Helmet>
 
         <div className="max-w-screen-xl mx-auto">
             <div className="flex flex-col md:flex-row justify-between gap-2 items-center">
-                <Title title="All Marathons" />
+                <Title title="Blogs" />
 
                 <div className="flex gap-1 sm:gap-2 filter-marathons">
                     <Dropdown className="" label={`Marathons Per Page (${size})`}>
@@ -92,18 +92,14 @@ const Marathons = () => {
 
                 <div className="max-w-sm sm:max-w-screen-xl mx-auto grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-3 xl:gap-5 mt-10">
 
-                    {marathons?.map(marathon => (
-                        <MarathonCard
-                            key={marathon._id}
-                            marathon={marathon}
-                        />))}
+                    {blogs?.map(blog => (<BlogCard key={blog._id} blog={blog}/>))}
                 </div>
             </div>
 
-            {totalMarathons > size ? <div className="mt-16 relative flex justify-center marathon-pagination">
+            {totalBlogs > size ? <div className="mt-16 relative flex justify-center marathon-pagination">
                 <Pagination
                     currentPage={currentPage}
-                    totalPages={Math.ceil(totalMarathons / size)}
+                    totalPages={Math.ceil(totalBlogs / size)}
                     onPageChange={onPageChange}
                 />
                 {loading ? <div className="absolute top-0 left-0 w-full h-full bg-transparent z-30">
@@ -113,4 +109,4 @@ const Marathons = () => {
     </section>);
 };
 
-export default Marathons;
+export default Blogs;

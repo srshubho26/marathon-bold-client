@@ -1,4 +1,4 @@
-import { Button, Card, Label, TextInput } from "flowbite-react";
+import { Card, Label, TextInput } from "flowbite-react";
 import Title from "../../components/reusuable/Title";
 import { Link, useNavigate } from "react-router-dom";
 import GoogleBtn from "../../components/reusuable/GoogleBtn";
@@ -7,6 +7,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Loading from "../../components/reusuable/Loading";
 import { Helmet } from "react-helmet-async";
+import signup from '../../assets/img/signup.svg';
 
 const Register = () => {
     const { createNewUser, user } = useContext(AuthContext);
@@ -59,7 +60,8 @@ const Register = () => {
             <title>Register - MarathonBold</title>
         </Helmet>
 
-        <Card className="max-w-sm mx-auto relative overflow-hidden">
+        <div className="max-w-screen-xl flex-col-reverse md:flex-row gap-5 justify-between items-center mx-auto flex">
+            <Card className="max-w-sm md:max-w-md w-full relative overflow-hidden">
             <Loading loading={loading} />
 
             <div className="flex">
@@ -95,7 +97,9 @@ const Register = () => {
                     <TextInput name="pass" type="password" placeholder="Enter your password" required />
                 </div>
 
-                <Button type="submit" className="bg-primary">Register</Button>
+                <button className="w-fit text-primary border border-primary bg-transparent hover:bg-primary-lite font-semibold text-lg rounded-lg px-6 py-2 hover:text-lite uppercase">
+                    Register
+                </button>
             </form>
             <Label className="text-desc text-sm sm:text-base">
                 Already have an account?
@@ -106,6 +110,12 @@ const Register = () => {
 
             <GoogleBtn setLoading={setLoading} setFormProcessing={setFormProcessing} to="/home" />
         </Card>
+
+        <div className="w-full max-w-sm md:max-w-xl">
+        <img src={signup} alt="" />
+        </div>
+        </div>
+
     </section>);
 };
 
