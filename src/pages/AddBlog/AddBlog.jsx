@@ -11,7 +11,7 @@ const imageHostingLink = `https://api.imgbb.com/1/upload?key=${import.meta.env.V
 
 const AddBlog = () => {
     const [loading, setLoading] = useState(false);
-    const { email, photoUrl, displayName } = useAuth();
+    const { email, photoURL, displayName } = useAuth();
     const { logOut } = useContext(AuthContext);
 
     const handleAdd = async e => {
@@ -31,7 +31,7 @@ const AddBlog = () => {
                 const description = form.description.value;
                 const author = {
                     name: displayName,
-                    thumb: photoUrl,
+                    thumb: photoURL,
                     email
                 }
                 const img = res.data.data.display_url
