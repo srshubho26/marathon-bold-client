@@ -1,27 +1,15 @@
 import { Fade } from "react-awesome-reveal";
 import Title from "../../../components/reusuable/Title";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Spinner } from "flowbite-react";
 import BlogCard from '../../../components/reusuable/BlogCard';
+import useData from "../../../hooks/useData";
 
 const OurBlogs = () => {
-    const [blogs, setBlogs] = useState(null);
-    const [err, setErr] = useState(false);
-    const [loading, setLoading] = useState(true);
-    const [isVisible, setIsVisible] = useState(false);
 
-    useEffect(() => {
-        if (!isVisible) return;
-        setErr(false);
-        axios("https://a11-server-weld.vercel.app/blogs?size=8")
-            .then(({ data }) => {
-                setBlogs(data)
-                setLoading(false)
-            })
-            .catch(() => setErr(true))
-    }, [isVisible]);
+    const [isVisible, setIsVisible] = useState(false);
+    const { data: blogs, loading, err } = useData('blogs', 8, '', 1, isVisible);
 
     return (<section className="py-20 px-3">
         <Title title="Our Blogs" />

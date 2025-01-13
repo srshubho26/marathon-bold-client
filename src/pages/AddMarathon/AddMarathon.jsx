@@ -1,5 +1,5 @@
 import { Label, Select, Textarea, TextInput } from "flowbite-react";
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import useAuth from "../../Provider/useAuth";
@@ -8,6 +8,9 @@ import axios from "axios";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Loading from "../../components/reusuable/Loading";
 import { Helmet } from "react-helmet-async";
+import ImageInput from '../../components/reusuable/ImageInput';
+import ImgPreview from "../../components/reusuable/ImgPreview";
+import { uploadImg } from "../../assets/utils";
 
 const datePickerStyle = "block w-full border disabled:cursor-not-allowed disabled:opacity-50 border-gray-300 bg-gray-50 text-gray-900 focus:border-cyan-500 focus:ring-cyan-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-cyan-500 dark:focus:ring-cyan-500 p-2.5 text-sm rounded-lg cursor-pointer cursor-pointer";
 
@@ -18,8 +21,26 @@ const AddMarathon = () => {
     const [marathonStart, setMarathonStart] = useState(new Date());
     const { email } = useAuth();
     const { logOut } = useContext(AuthContext);
+    const [previewImg, setPreviewImg] = useState('');
+    const photoInputRef = useRef();
 
-    const handleAdd = e => {
+    const imgPrevVals = {
+        photoInputRef,
+        previewImg,
+        setPreviewImg,
+        className: 'max-w-96 aspect-[3/2]'
+    }
+
+    const imgInputVals = {
+        wrapperClass: `col-span-full ${previewImg ? 'hidden' : ''}`,
+        labelClass: 'lg:text-lg',
+        label: 'Marathon Image',
+        name: 'marathonImg',
+        photoInputRef,
+        setPreviewImg
+    }
+
+    const handleAdd = async e => {
         e.preventDefault();
         const form = e.target;
         const regStart = startDate.getTime();
@@ -45,9 +66,16 @@ const AddMarathon = () => {
 
         const title = form.title.value;
         const location = form.location.value;
-        const marathonImg = form.marathonImg.value;
         const distance = form.distance.value;
         const description = form.description.value;
+
+        const res = await uploadImg(form.marathonImg.files[0]);
+        if (!res.success) {
+            swal("Oops!", res.message, "error");
+            setLoading(false);
+            return;
+        }
+        const marathonImg = res.imgUrl;
 
         const data = { title, regStart, regEnd, eventStart, location, marathonImg, distance, description, creatorEmail: email, createdAt: new Date().getTime() };
         axios.post("https://a11-server-weld.vercel.app/add-marathon", data, { withCredentials: true })
@@ -145,13 +173,6 @@ const AddMarathon = () => {
 
             <div>
                 <div className="mb-2 block">
-                    <Label className="lg:text-lg" value="Marathon Image" />
-                </div>
-                <TextInput name="marathonImg" type="text" placeholder="Enter Marathon Image Link" required />
-            </div>
-
-            <div className="col-span-full">
-                <div className="mb-2 block">
                     <Label value="Running distance" />
                 </div>
                 <Select name="distance">
@@ -162,11 +183,14 @@ const AddMarathon = () => {
                 </Select>
             </div>
 
+            <ImageInput {...imgInputVals} />
+            <ImgPreview {...imgPrevVals} />
+
             <div className="col-span-full">
                 <div className="mb-2 block">
                     <Label className="lg:text-lg" value="Description" />
                 </div>
-                <Textarea name="description" placeholder="Description of Marathon" required rows={5} />
+                <Textarea name="description" placeholder="Description of Marathon" required rows={8} />
             </div>
 
             <div className="col-span-full">

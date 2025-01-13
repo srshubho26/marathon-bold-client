@@ -1,44 +1,19 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import swal from "sweetalert";
+import { useState } from "react";
 import Title from "../../components/reusuable/Title";
 import Loading from "../../components/reusuable/Loading";
 import { Dropdown, Pagination } from "flowbite-react";
 import { Helmet } from "react-helmet-async";
 import MarathonCard from "../../components/reusuable/MarathonCard";
+import useData from "../../hooks/useData";
 
 const Marathons = () => {
-    const [marathons, setMarathons] = useState(null);
-    const [loading, setLoading] = useState(false);
     const [sort, setSort] = useState("");
-
-    const [totalMarathons, setTotalMarathons] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [size, setSize] = useState(8);
     const onPageChange = page => setCurrentPage(page);
     const sizes = [8, 12, 16, 20];
 
-    useEffect(() => {
-        const loadWithTotalNumber = async () => {
-            setLoading(true);
-
-            if (totalMarathons < 1) {
-                const total = await axios("https://a11-server-weld.vercel.app/total-marathons");
-                setTotalMarathons(total.data.count);
-            }
-
-            axios(`https://a11-server-weld.vercel.app/marathons?sort=${sort}&page=${currentPage - 1}&size=${size}`)
-                .then(res => {
-                    setMarathons(res.data);
-                    setLoading(false);
-                })
-                .catch(() => {
-                    swal("Oops!", "Something went wrong!", "error");
-                    setLoading(false);
-                })
-        }
-        loadWithTotalNumber();
-    }, [totalMarathons, sort, currentPage, size]);
+    const { data: marathons, loading, totalData: totalMarathons } = useData('marathons', size, sort, currentPage);
 
     return (<section className="py-20 px-2">
         <Helmet>

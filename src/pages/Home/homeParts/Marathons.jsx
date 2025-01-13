@@ -1,28 +1,14 @@
-import axios from "axios";
 import { Spinner } from "flowbite-react";
-import { useEffect } from "react";
 import { useState } from "react";
 import Title from "../../../components/reusuable/Title";
 import { Fade } from "react-awesome-reveal";
 import MarathonCard from "../../../components/reusuable/MarathonCard";
 import { Link } from "react-router-dom";
+import useData from "../../../hooks/useData";
 
 const Marathons = () => {
-    const [marathons, setMarathons] = useState(null);
-    const [err, setErr] = useState(false);
-    const [loading, setLoading] = useState(true);
     const [isVisible, setIsVisible] = useState(false);
-
-    useEffect(() => {
-        if (!isVisible) return;
-        setErr(false);
-        axios("https://a11-server-weld.vercel.app/marathons?size=8")
-            .then(({ data }) => {
-                setMarathons(data)
-                setLoading(false)
-            })
-            .catch(() => setErr(true))
-    }, [isVisible]);
+    const { data: marathons, loading, err } = useData('marathons', 8, '', 1, isVisible);
 
     return (<section className="py-20 px-3">
         <Title title="Our Marathons" />

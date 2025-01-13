@@ -1,44 +1,20 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import swal from "sweetalert";
 import Title from "../../components/reusuable/Title";
 import { Dropdown, Pagination } from "flowbite-react";
 import Loading from "../../components/reusuable/Loading";
 import BlogCard from "../../components/reusuable/BlogCard";
+import useData from "../../hooks/useData";
 
 const Blogs = () => {
-    const [blogs, setBlogs] = useState(null);
-    const [loading, setLoading] = useState(false);
     const [sort, setSort] = useState("");
 
-    const [totalBlogs, setTotalBlogs] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [size, setSize] = useState(8);
     const onPageChange = page => setCurrentPage(page);
     const sizes = [8, 12, 16, 20];
 
-    useEffect(() => {
-        const loadWithTotalNumber = async () => {
-            setLoading(true);
-
-            if (totalBlogs < 1) {
-                const total = await axios("https://a11-server-weld.vercel.app/total-blogs");
-                setTotalBlogs(total.data.count);
-            }
-
-            axios(`https://a11-server-weld.vercel.app/blogs?sort=${sort}&page=${currentPage - 1}&size=${size}`)
-                .then(res => {
-                    setBlogs(res.data);
-                    setLoading(false);
-                })
-                .catch(() => {
-                    swal("Oops!", "Something went wrong!", "error");
-                    setLoading(false);
-                })
-        }
-        loadWithTotalNumber();
-    }, [totalBlogs, sort, currentPage, size]);
+    const { data: blogs, loading, totalData: totalBlogs } = useData('blogs', size, sort, currentPage);
 
     return (<section className="py-20 px-2">
         <Helmet>
@@ -92,7 +68,7 @@ const Blogs = () => {
 
                 <div className="max-w-sm sm:max-w-screen-xl mx-auto grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-3 xl:gap-5 mt-10">
 
-                    {blogs?.map(blog => (<BlogCard key={blog._id} blog={blog}/>))}
+                    {blogs?.map(blog => (<BlogCard key={blog._id} blog={blog} />))}
                 </div>
             </div>
 
