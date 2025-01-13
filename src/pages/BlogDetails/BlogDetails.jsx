@@ -36,10 +36,10 @@ const BlogDetails = () => {
 
         <div className="max-w-screen-xl min-h-52 relative mx-auto">
             <Loading loading={loading} />
-            {details ? <div className="overflow-hidden rounded-xl shadow-lg border relative">
-                <img style={{ aspectRatio: '3/2' }} src={details?.img} className="w-full max-h-[calc(100vh-150px)] object-cover" />
+            {details ? <div className="relative">
+                <img style={{ aspectRatio: '3/2' }} src={details?.img} className="w-full max-h-[calc(100vh-150px)] object-cover rounded-lg" />
 
-                <div className="relative text-sm sm:text-lg py-6 px-2 sm:px-6 text-desc dark:text-lite ">
+                <div className="relative text-sm sm:text-lg py-6 text-desc dark:text-lite">
                     <div className=' flex items-center gap-2 mb-3'>
                         <img src={details?.author?.thumb} className="w-10 h-10 object-cover border border-primary rounded-full" />
                         <span className='text-primary font-semibold text-lg pr-5'>{details?.author?.name}</span>

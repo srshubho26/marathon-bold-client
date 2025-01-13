@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import swal from "sweetalert";
 import moment from "moment";
@@ -19,6 +19,7 @@ const Details = () => {
     const [isApplied, setIsApplied] = useState(false);
     const navigate = useNavigate();
     const today = new Date().getTime();
+    const {pathname} = useLocation();
 
     useEffect(() => {
         if (!user) return;
@@ -63,7 +64,7 @@ const Details = () => {
 
         <div className="max-w-screen-xl min-h-52 relative mx-auto">
             <Loading loading={loading} />
-            {details ? <div className="overflow-hidden rounded-xl shadow-lg border relative">
+            {details ? <div className="relative">
                 <span className="bg-primary text-lite rounded-full px-2 absolute top-1 sm:top-5 left-1 sm:left-5 text-sm sm:text-base">
                     {details?.location}
                 </span>
@@ -74,10 +75,9 @@ const Details = () => {
                     <span>{moment(details?.regEnd).format('D MMM, YY')}</span>
                 </p>
 
-                <img style={{ aspectRatio: '3/2' }} src={details?.marathonImg} className="w-full max-h-[calc(100vh-150px)] object-cover" />
+                <img style={{ aspectRatio: '3/2' }} src={details?.marathonImg} className="w-full max-h-[calc(100vh-150px)] object-cover rounded-lg" />
 
-                <div className="relative text-sm sm:text-lg py-6 px-2 sm:px-6 text-desc dark:text-lite ">
-
+                <div className="relative text-sm sm:text-lg py-6 text-desc dark:text-lite">
                     <p className="absolute -top-9 sm:-top-14 left-1 sm:left-5 flex gap-1 items-center text-dark dark:text-lite bg-lite dark:bg-dark px-5 border border-lite py-1 rounded-full">
                         <span className="text-xl"><GrAnnounce /></span>
                         <span>{moment(details?.createdAt).format('MMM D, YYYY')}</span>
@@ -91,9 +91,11 @@ const Details = () => {
                         <>{
                             user ? <>{isApplied ? <span className="font-medium text-sm lg:text-base text-primary">
                                 Registered
-                            </span> : showRegisterBtn}</> : <span className="font-medium text-sm lg:text-base text-gray-500">
+                            </span> : showRegisterBtn}</> : <Link 
+                            className="font-medium text-sm lg:text-base text-primary"
+                            to="/login" state={pathname}>
                                 Login to see your registration status
-                            </span>
+                            </Link>
                         }</>
                     </h5>
 

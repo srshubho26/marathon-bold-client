@@ -38,10 +38,10 @@ const StartCountdown = ({ eventStart, createdAt }) => {
     const durationForDays = Math.trunc((eventStart - createdAt) / 1000);
 
     return (<div className='mt-16'>
-    <Title title={isOver ? "Marathon has been started" : "Marathon will start after"} />
+    <Title title={isOver ? "Marathon passed the starting date" : "Marathon will start after"} />
 
-        <div className='grid sm:grid-cols-2 self-center lg:grid-cols-4 text-xl font-semibold text-center text-primary mt-5 uppercase'>
-        <div className="flex justify-center py-5">
+        <div className='flex justify-center gap-5 flex-wrap text-xl font-semibold text-center text-primary my-5 uppercase max-w-md mx-auto lg:max-w-full'>
+        <div className="flex justify-center">
             <CountdownCircleTimer
                 isPlaying={getRemainingTimeInSecond()>1}
                 duration={durationForDays}
@@ -63,7 +63,7 @@ const StartCountdown = ({ eventStart, createdAt }) => {
             </CountdownCircleTimer>
         </div>
 
-        <div className="flex justify-center py-5">
+        <div className="flex justify-center">
             <CountdownCircleTimer
                 isPlaying={getRemainingTimeInSecond()>1}
                 duration={86400}
@@ -88,7 +88,7 @@ const StartCountdown = ({ eventStart, createdAt }) => {
             </CountdownCircleTimer>
         </div>
 
-        <div className="flex justify-center py-5">
+        <div className="flex justify-center">
             <CountdownCircleTimer
                 isPlaying={getRemainingTimeInSecond()>1}
                 duration={3600}
@@ -113,7 +113,7 @@ const StartCountdown = ({ eventStart, createdAt }) => {
             </CountdownCircleTimer>
         </div>
 
-        <div className="flex justify-center py-5">
+        <div className="flex justify-center">
             <CountdownCircleTimer
                 isPlaying={getRemainingTimeInSecond()>1}
                 duration={60}
