@@ -1,33 +1,13 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { useNavigate, useParams } from "react-router-dom";
-import swal from "sweetalert";
+import { useParams } from "react-router-dom";
 import Loading from "../../components/reusuable/Loading";
 import { GrSchedules } from "react-icons/gr";
 import moment from "moment";
+import useDetails from "../../hooks/useDetails";
 
 const BlogDetails = () => {
-    const [details, setDetails] = useState(null);
     const { id } = useParams();
-    const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        axios(`https://a11-server-weld.vercel.app/blogs/${id}`)
-            .then(res => {
-                if (Object.keys(res.data).length < 1) {
-                    return navigate('/');
-                }
-                setDetails(res.data);
-                setLoading(false);
-            })
-            .catch(() => {
-                swal("Oops!", "Something went wrong!", "error");
-                navigate('/');
-                setLoading(false);
-            })
-    }, [id, navigate]);
+    const { details, loading } = useDetails(id, 'blogs');
 
     return (<section className="pt-10 pb-20 px-2 bg-lite dark:bg-gray-900">
         <Helmet>

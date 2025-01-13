@@ -1,23 +1,21 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
-import swal from "sweetalert";
 import moment from "moment";
 import Loading from "../../components/reusuable/Loading";
 import StartCountdown from "./parts/StartCountdown";
 import { Helmet } from "react-helmet-async"
 import { GrAnnounce } from "react-icons/gr";
+import useDetails from "../../hooks/useDetails";
 
 const registerBtnCss = "bg-transparent border border-primary rounded-md font-medium text-lg text-primary hover:bg-primary hover:text-lite transition-colors px-5 py-2";
 
 const Details = () => {
-    const [details, setDetails] = useState(null);
     const { id } = useParams();
-    const { user, logOut } = useContext(AuthContext);
-    const [loading, setLoading] = useState(true);
+    const {details, loading} = useDetails(id);
+    const { user } = useContext(AuthContext);
     const [isApplied, setIsApplied] = useState(false);
-    const navigate = useNavigate();
     const today = new Date().getTime();
     const {pathname} = useLocation();
 
@@ -28,25 +26,6 @@ const Details = () => {
                 if (res.data.registered) setIsApplied(true);
             })
     }, [user, id]);
-
-    useEffect(() => {
-        axios(`https://a11-server-weld.vercel.app/marathons/${id}`)
-            .then(res => {
-                if (Object.keys(res.data).length < 1) {
-                    return navigate('/');
-                }
-                setDetails(res.data);
-                setLoading(false);
-            })
-            .catch(err => {
-                swal("Oops!", "Something went wrong!", "error");
-                if (err.status === 401 || err.status === 403) {
-                    return logOut();
-                }
-                navigate('/');
-                setLoading(false);
-            })
-    }, [id, user, logOut, navigate]);
 
     const showRegisterBtn = <>{(today > details?.regStart && details?.regEnd > today) ? <Link
         className={registerBtnCss}
