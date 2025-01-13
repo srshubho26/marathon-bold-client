@@ -1,4 +1,4 @@
-import { Card, FileInput, Label, TextInput } from "flowbite-react";
+import { Card, Label, TextInput } from "flowbite-react";
 import Title from "../../components/reusuable/Title";
 import { Link, useNavigate } from "react-router-dom";
 import GoogleBtn from "../../components/reusuable/GoogleBtn";
@@ -8,18 +8,25 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import Loading from "../../components/reusuable/Loading";
 import { Helmet } from "react-helmet-async";
 import signup from '../../assets/img/signup.svg';
-import { LiaTimesSolid } from "react-icons/lia";
-import axios from "axios";
-
-const imageHostingLink = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGE_UPLOAD_API}`;
+import ImgPreview from "../../components/reusuable/ImgPreview";
+import ImageInput from "../../components/reusuable/ImageInput";
+import { uploadImg } from "../../assets/utils";
 
 const Register = () => {
     const { createNewUser, user } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [formProcessing, setFormProcessing] = useState(false);
-    const [previewImg, setPreviewImg] = useState(null);
+    const [previewImg, setPreviewImg] = useState('');
     const photoInputRef = useRef();
+    const imgPrevVals = { photoInputRef, previewImg, setPreviewImg, className: 'max-w-60 aspect-[1/1]' }
+    const imgInputVals = {
+        wrapperClass: previewImg ? 'hidden' : '',
+        label: 'Profile Picture',
+        name: 'profilePic',
+        photoInputRef,
+        setPreviewImg
+    }
 
     useEffect(() => {
         if (formProcessing) return;
@@ -45,44 +52,30 @@ const Register = () => {
         setLoading(true);
         setFormProcessing(true);
 
-        try {
-            const imgFile = { image: profilePic }
-            const res = await axios.post(imageHostingLink, imgFile, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
+        const res = await uploadImg(profilePic)
 
-            if (res?.data?.success) {
-                createNewUser(email, pass, name, res.data.data.display_url)
-                    .then(() => {
-                        setLoading(false);
-                        swal('Success', 'Your are a registered user now.', 'success')
-                            .then(() => {
-                                navigate('/');
-                            })
-
-                    }).catch(({ code }) => {
-                        let message = 'Something went wrong. Please check your internet connection & try again.';
-                        code === 'auth/email-already-in-use' && (message = 'Email already exists.');
-
-                        swal('Error!', message, 'error');
-                        setLoading(false);
-                    })
-            }
-        } catch (err) {
+        if (!res?.success) {
             setLoading(false);
             setFormProcessing(false);
-            swal('Error!', err.message, 'error');
+            swal('Error!', res.message, 'error');
+            return;
         }
 
-    }
+        createNewUser(email, pass, name, res?.imgUrl)
+            .then(() => {
+                setLoading(false);
+                swal('Success', 'Your are a registered user now.', 'success')
+                    .then(() => {
+                        navigate('/');
+                    })
 
-    const handleFileInput = e => {
-        const img = e.target.files[0];
-        const reader = new FileReader();
-        reader.onload = () => setPreviewImg(reader.result);
-        img && reader.readAsDataURL(img);
+            }).catch(({ code }) => {
+                let errMsg = 'Something went wrong. Please check your internet connection & try again.';
+                code === 'auth/email-already-in-use' && (errMsg = 'Email already exists.');
+
+                swal('Error!', errMsg, 'error');
+                setLoading(false);
+            })
     }
 
     return (<section className="py-20 px-2 bg-lite dark:bg-gray-900">
@@ -113,24 +106,8 @@ const Register = () => {
                         <TextInput name="email" type="email" placeholder="Enter your email" required />
                     </div>
 
-                    <div className={previewImg ? 'hidden' : ''}>
-                        <div className="mb-2 block">
-                            <Label value="Profile Picture" />
-                        </div>
-
-                        <FileInput name="profilePic" ref={photoInputRef} onChange={handleFileInput} required />
-                    </div>
-
-                    {previewImg && <div className="w-full max-w-60 aspect-[1/1] relative">
-                        <button className="absolute -top-2 -right-2 border rounded-full p-1 text-lite bg-red-600 text-base" onClick={() => {
-                            photoInputRef.current.value = '';
-                            setPreviewImg(null);
-                        }}>
-                            <LiaTimesSolid />
-                        </button>
-
-                        <img src={previewImg} className="rounded-md border border-desc h-full object-contain w-full" />
-                    </div>}
+                    <ImageInput {...imgInputVals} />
+                    <ImgPreview {...imgPrevVals} />
 
                     <div>
                         <div className="mb-2 block">

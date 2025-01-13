@@ -48,7 +48,7 @@ const MyBlogs = () => {
             axios.delete(`https://a11-server-weld.vercel.app/my-blogs/delete?id=${id}&creatorEmail=${author}`, {withCredentials: true})
             .then(res=>{
                 if(res.data.acknowledged){
-                    swal("Deleted!", "Your marathon has been deleted!", "success")
+                    swal("Deleted!", "Your blog has been deleted!", "success")
                     .then(loadMyBlogs)
                 }
             })
