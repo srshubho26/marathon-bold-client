@@ -4,6 +4,7 @@ import auth from '../firebase/firebase.config';
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Loading from '../components/reusuable/Loading';
 
 export const AuthContext = createContext();
 const googleAuth = new GoogleAuthProvider();
@@ -19,11 +20,11 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
-            if(currentUser){
+            if (currentUser) {
                 axios.post("https://a11-server-weld.vercel.app/jwt", { email: currentUser.email }, { withCredentials: true })
-                .then(()=>setLoading(false))
+                    .then(() => setLoading(false))
 
-            }else{
+            } else {
                 setLoading(false)
             }
         });
@@ -50,21 +51,21 @@ const AuthProvider = ({ children }) => {
     const loginUser = (email, password) => {
         return signInWithEmailAndPassword(auth, email, password);
     }
-    
+
     // Logout function
     const logOut = () => {
         signOut(auth)
-        .then(()=>{
-            axios.post("https://a11-server-weld.vercel.app/logout", {}, {withCredentials: true})
-            .then(()=>navigate("/login"))
-        })
+            .then(() => {
+                axios.post("https://a11-server-weld.vercel.app/logout", {}, { withCredentials: true })
+                    .then(() => navigate("/login"))
+            })
     }
 
-    const values = {user, logOut, loginUser, createNewUser, googleSignin, setDark, dark}
+    const values = { user, logOut, loginUser, createNewUser, googleSignin, setDark, dark }
 
-    return (<div className={dark  ? "dark" : ""}>
+    return (<div className={dark ? "dark" : ""}>
         <AuthContext.Provider value={values}>
-            {!loading && children}
+            {loading ? <Loading loading={loading} /> : children}
         </AuthContext.Provider>
     </div>);
 };

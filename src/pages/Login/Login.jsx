@@ -53,44 +53,44 @@ const Login = () => {
         </Helmet>
 
         <div className="max-w-screen-xl mx-auto flex-col-reverse md:flex-row flex items-center gap-5 justify-between">
-        <Card className="max-w-sm md:max-w-md w-full relative overflow-hidden">
-            <Loading loading={loading} />
+            <Card className="max-w-sm md:max-w-md w-full relative overflow-hidden">
+                <Loading loading={loading} />
 
-            <div className="flex">
-                <Title title="Login" />
+                <div className="flex">
+                    <Title title="Login" />
+                </div>
+
+                <form className="flex flex-col gap-4" onSubmit={handleLogin}>
+                    <div>
+                        <div className="mb-2 block">
+                            <Label value="Email" />
+                        </div>
+                        <TextInput name="email" type="email" placeholder="Enter your email" required />
+                    </div>
+                    <div>
+                        <div className="mb-2 block">
+                            <Label value="Password" />
+                        </div>
+                        <TextInput name="pass" type="password" placeholder="Enter your password" required />
+                    </div>
+
+                    <button className="w-fit text-primary border border-primary bg-transparent hover:bg-primary-lite font-semibold text-lg rounded-lg px-6 py-2 hover:text-lite uppercase">
+                        Login
+                    </button>
+                </form>
+                <Label className="text-desc text-sm sm:text-base">
+                    Don&apos;t have an account?
+                    <Link to="/register" className="ml-2 text-title dark:text-lite">Register</Link>
+                </Label>
+
+                <h3 className="text-center dark:text-lite text-lg font-semibold">OR</h3>
+
+                <GoogleBtn setLoading={setLoading} setFormProcessing={setFormProcessing} to={state || "/home"} />
+            </Card>
+
+            <div className="w-full max-w-sm md:max-w-xl">
+                <img src={login} />
             </div>
-
-            <form className="flex flex-col gap-4" onSubmit={handleLogin}>
-                <div>
-                    <div className="mb-2 block">
-                        <Label value="Email" />
-                    </div>
-                    <TextInput name="email" type="email" placeholder="Enter your email" required />
-                </div>
-                <div>
-                    <div className="mb-2 block">
-                        <Label value="Password" />
-                    </div>
-                    <TextInput name="pass" type="password" placeholder="Enter your password" required />
-                </div>
-
-                <button className="w-fit text-primary border border-primary bg-transparent hover:bg-primary-lite font-semibold text-lg rounded-lg px-6 py-2 hover:text-lite uppercase">
-                    Login
-                </button>
-            </form>
-            <Label className="text-desc text-sm sm:text-base">
-                Don&apos;t have an account?
-                <Link to="/register" className="ml-2 text-title dark:text-lite">Register</Link>
-            </Label>
-
-            <h3 className="text-center dark:text-lite text-lg font-semibold">OR</h3>
-
-            <GoogleBtn setLoading={setLoading} setFormProcessing={setFormProcessing} to={state || "/home"} />
-        </Card>
-
-        <div className="w-full max-w-sm md:max-w-xl">
-        <img src={login} alt="" />
-        </div>
         </div>
     </section>);
 };

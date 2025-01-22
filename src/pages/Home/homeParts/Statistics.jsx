@@ -8,9 +8,9 @@ import { BiCalendarEvent } from "react-icons/bi";
 import { FaPeopleGroup } from "react-icons/fa6";
 import bgImg from '../../../assets/img/countup_bg.jpg';
 
+let timeout;
 const Statistics = () => {
     const [isVisible, setIsVisible] = useState(false);
-    let timeout;
     const handleVisiblility = (inview)=>{
         if(timeout)clearTimeout(timeout);
         timeout = setTimeout(()=>{
