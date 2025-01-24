@@ -4,15 +4,9 @@
     transition: background 200ms, left 200ms, top 400ms;
 }
 
-/* header .container{
-    width: 100%;
-    max-width: 100%;
-} */
-
 header > div > nav{
     padding: 0!important;
 }
-
 
 body {
     font-family: "Poppins", serif;
@@ -67,6 +61,10 @@ div.swiper-button-prev{
     object-fit: cover
 }
 
+form input:focus, form textarea:focus{
+    border-color: #ce0395e9!important;
+    box-shadow: none!important;
+}
 
 @tailwind base;
 @tailwind components;
