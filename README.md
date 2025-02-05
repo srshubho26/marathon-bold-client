@@ -1,3 +1,5 @@
+![Marathon Bold](https://github.com/srshubho26/srshubho26/blob/main/marathon-bold.png?raw=true)
+
 # MarathonBold
 
 Marathon Bold is a platform for the people who are passionate about running. We organize different running events every year all over the world. Here people who are logged in can browse different Marathon events all over the world and participate in the event by registering. Besides logged in users can create Marathon event also modify and delete own Marathons.
