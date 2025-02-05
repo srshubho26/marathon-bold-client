@@ -76,4 +76,4 @@ Marathon Bold is a platform for the people who are passionate about running. We 
 https://marathon-bold.web.app
 
 ## Backend Repository:
-https://github.com/shuvo22890/marathon-bold-server
+https://github.com/srshubho26/marathon-bold-server
