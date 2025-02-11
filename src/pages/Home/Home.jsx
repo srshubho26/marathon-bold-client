@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Banner from "./homeParts/Banner";
 import FAQ from "./homeParts/FAQ";
 import Marathons from "./homeParts/Marathons";
@@ -7,20 +8,22 @@ import UpcomingMarathons from "./homeParts/UpcomingMarathons";
 import { Helmet } from "react-helmet-async";
 
 const Home = () => {
-    return (
-        <>
-            <Helmet>
-                <title>Home - MarathonBold</title>
-            </Helmet>
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
-            <Banner />
-            <Marathons />
-            <UpcomingMarathons />
-            <Statistics />
-            <OurBlogs />
-            <FAQ />
-        </>
-    );
+    return (<>
+        <Helmet>
+            <title>Home - MarathonBold</title>
+        </Helmet>
+
+        <Banner />
+        <Marathons />
+        <UpcomingMarathons />
+        <Statistics />
+        <OurBlogs />
+        <FAQ />
+    </>);
 };
 
 export default Home;

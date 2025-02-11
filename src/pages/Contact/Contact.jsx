@@ -2,8 +2,13 @@ import { Helmet } from "react-helmet-async";
 import Title from "../../components/reusuable/Title";
 import Form from "./Form";
 import contact from '../../assets/img/contact.svg';
+import { useEffect } from "react";
 
 const Contact = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (<section className="py-20 px-2">
         <Helmet>
             <title>Contact Us - MarathonBold</title>
@@ -14,7 +19,7 @@ const Contact = () => {
 
             <div className="flex flex-col-reverse md:flex-row items-center gap-5 mt-5">
                 <div className="w-full md:w-1/2">
-                <Form />
+                    <Form />
                 </div>
 
                 <div className="w-full md:w-1/2">

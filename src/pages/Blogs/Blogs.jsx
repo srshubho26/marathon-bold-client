@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Title from "../../components/reusuable/Title";
 import { Dropdown, Pagination } from "flowbite-react";
@@ -15,6 +15,10 @@ const Blogs = () => {
     const sizes = [8, 12, 16, 20];
 
     const { data: blogs, loading, totalData: totalBlogs } = useData('blogs', size, sort, currentPage);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return (<section className="py-20 px-2">
         <Helmet>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Title from "../../components/reusuable/Title";
 import Loading from "../../components/reusuable/Loading";
 import { Dropdown, Pagination } from "flowbite-react";
@@ -14,6 +14,10 @@ const Marathons = () => {
     const sizes = [8, 12, 16, 20];
 
     const { data: marathons, loading, totalData: totalMarathons } = useData('marathons', size, sort, currentPage);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return (<section className="py-20 px-2">
         <Helmet>

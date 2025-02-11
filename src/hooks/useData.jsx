@@ -16,11 +16,11 @@ const useData = (type, size, sort='', currentPage=0, shouldLoad=true) => {
             setLoading(true);
 
             if (totalData < 1) {
-                const total = await axios(`http://localhost:5000/total-${type}`);
+                const total = await axios(`https://a11-server-weld.vercel.app/total-${type}`);
                 setTotalData(total.data.count);
             }
 
-            axios(`http://localhost:5000/${type}?sort=${sort}&page=${currentPage - 1}&size=${size}`)
+            axios(`https://a11-server-weld.vercel.app/${type}?sort=${sort}&page=${currentPage - 1}&size=${size}`)
                 .then(res => {
                     setData(res.data);
                     setLoading(false);

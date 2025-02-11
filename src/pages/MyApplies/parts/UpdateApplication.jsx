@@ -23,7 +23,7 @@ const UpdateApplication = ({ loadMyApplies, openModal, setOpenModal, toUpdate, l
         const doc = { fname, lname, contact, additionalInfo};
         const ownerVerify = { id: toUpdate._id, creatorEmail: toUpdate.email };
 
-        axios.put("http://localhost:5000/update-application", { doc, ownerVerify }, { withCredentials: true })
+        axios.put("https://a11-server-weld.vercel.app/update-application", { doc, ownerVerify }, { withCredentials: true })
             .then(res => {
                 if (res.data.acknowledged) {
                     swal("Success", "Your application is updated successfully.", "success")

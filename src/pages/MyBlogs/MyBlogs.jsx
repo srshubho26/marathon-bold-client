@@ -18,8 +18,13 @@ const MyBlogs = () => {
     const [openModal, setOpenModal] = useState(false);
     const [toUpdate, setToUpdate] = useState(null);
 
+    
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     const loadMyBlogs = useCallback(()=>{
-        axios(`http://localhost:5000/my-blogs?email=${email}`, { withCredentials: true })
+        axios(`https://a11-server-weld.vercel.app/my-blogs?email=${email}`, { withCredentials: true })
             .then(res => {
                 setBlogs(res.data);
                 setLoading(false);
@@ -45,7 +50,7 @@ const MyBlogs = () => {
           .then(isConfirmed => {
             if(!isConfirmed)return;
             setLoading(true);
-            axios.delete(`http://localhost:5000/my-blogs/delete?id=${id}&creatorEmail=${author}`, {withCredentials: true})
+            axios.delete(`https://a11-server-weld.vercel.app/my-blogs/delete?id=${id}&creatorEmail=${author}`, {withCredentials: true})
             .then(res=>{
                 if(res.data.acknowledged){
                     swal("Deleted!", "Your blog has been deleted!", "success")

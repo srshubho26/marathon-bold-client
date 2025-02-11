@@ -17,9 +17,13 @@ const MyApplies = () => {
     const [openModal, setOpenModal] = useState(false);
     const [toUpdate, setToUpdate] = useState(null);
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     const loadMyApplies = useCallback((search = "") => {
         setLoading(true);
-        axios(`http://localhost:5000/my-applies?email=${user.email}&search=${search}`, { withCredentials: true })
+        axios(`https://a11-server-weld.vercel.app/my-applies?email=${user.email}&search=${search}`, { withCredentials: true })
             .then(res => {
                 setApplications(res.data);
                 setLoading(false);
@@ -47,11 +51,11 @@ const MyApplies = () => {
             .then(isConfirmend => {
                 if (!isConfirmend) return;
                 setLoading(true);
-                axios.delete(`http://localhost:5000/my-applies/delete?id=${id}&creatorEmail=${author}&marathonId=${marathonId}`, { withCredentials: true })
+                axios.delete(`https://a11-server-weld.vercel.app/my-applies/delete?id=${id}&creatorEmail=${author}&marathonId=${marathonId}`, { withCredentials: true })
                     .then(res => {
                         if (res.data.acknowledged) {
                             swal("Deleted!", "Your marathon has been deleted!", "success")
-                                .then(()=>loadMyApplies(''))
+                                .then(() => loadMyApplies(''))
                         }
                     })
                     .catch(() => {
@@ -115,7 +119,7 @@ const MyApplies = () => {
                         </TableCell>
                     </TableRow>)}
                 </TableBody>
-                {toUpdate && <UpdateApplication dark={dark} openModal={openModal} logOut={logOut} toUpdate={toUpdate} setOpenModal={setOpenModal} loadMyApplies={()=>loadMyApplies("")} />}
+                {toUpdate && <UpdateApplication dark={dark} openModal={openModal} logOut={logOut} toUpdate={toUpdate} setOpenModal={setOpenModal} loadMyApplies={() => loadMyApplies("")} />}
             </Table>
         </div> : null}
     </section>);

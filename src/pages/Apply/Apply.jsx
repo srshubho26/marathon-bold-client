@@ -17,8 +17,12 @@ const Apply = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const asyncEffect = async()=>{
-            axios.post(`http://localhost:5000/marathons/${id}`, { email: user.email }, { withCredentials: true })
+        window.scrollTo(0, 0);
+    }, []);
+
+    useEffect(() => {
+        const asyncEffect = async () => {
+            axios.post(`https://a11-server-weld.vercel.app/marathons/${id}`, { email: user.email }, { withCredentials: true })
                 .then(res => {
                     const data = res.data;
                     const today = new Date().getTime();
@@ -30,13 +34,13 @@ const Apply = () => {
                 })
                 .catch(err => {
                     swal("Oops!", "Something went wrong!", "error")
-                    .then(()=>{
-                        if (err.status === 401 || err.status === 403) {
-                            logOut();
-                        }else{
-                            navigate("/home");
-                        }
-                    })
+                        .then(() => {
+                            if (err.status === 401 || err.status === 403) {
+                                logOut();
+                            } else {
+                                navigate("/home");
+                            }
+                        })
                     setLoading(false);
                 })
 
@@ -65,7 +69,7 @@ const Apply = () => {
 
         const forMarathonUpdate = { totalReg: marathonData.totalRegCount, id: marathonData._id }
 
-        axios.post("http://localhost:5000/marathon-apply", { applyData, forMarathonUpdate }, { withCredentials: true })
+        axios.post("https://a11-server-weld.vercel.app/marathon-apply", { applyData, forMarathonUpdate }, { withCredentials: true })
             .then(res => {
                 if (res.data.acknowledged) {
                     swal("Done", "Your registration is completed.", "success")

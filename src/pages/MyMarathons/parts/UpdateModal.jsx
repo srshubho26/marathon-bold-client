@@ -80,7 +80,7 @@ const UpdateModal = ({ loadMyMarathons, openModal, setOpenModal, toUpdate, logOu
         }
         const ownerVerify = { id: toUpdate._id, creatorEmail: toUpdate.creatorEmail };
 
-        axios.put("http://localhost:5000/my-marathons/update", { doc, ownerVerify }, { withCredentials: true })
+        axios.put("https://a11-server-weld.vercel.app/my-marathons/update", { doc, ownerVerify }, { withCredentials: true })
             .then(res => {
                 if (res.data.acknowledged) {
                     swal("Success", "Your marathon is updated successfully.", "success")

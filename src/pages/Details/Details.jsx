@@ -13,15 +13,19 @@ const registerBtnCss = "bg-transparent border border-primary rounded-md font-med
 
 const Details = () => {
     const { id } = useParams();
-    const {details, loading} = useDetails(id);
+    const { details, loading } = useDetails(id);
     const { user } = useContext(AuthContext);
     const [isApplied, setIsApplied] = useState(false);
     const today = new Date().getTime();
-    const {pathname} = useLocation();
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     useEffect(() => {
         if (!user) return;
-        axios.post('http://localhost:5000/is-already-applied', { email: user.email, marathonId: id }, { withCredentials: true })
+        axios.post('https://a11-server-weld.vercel.app/is-already-applied', { email: user.email, marathonId: id }, { withCredentials: true })
             .then(res => {
                 if (res.data.registered) setIsApplied(true);
             })
@@ -70,9 +74,9 @@ const Details = () => {
                         <>{
                             user ? <>{isApplied ? <span className="font-medium text-sm lg:text-base text-primary">
                                 Registered
-                            </span> : showRegisterBtn}</> : <Link 
-                            className="font-medium text-sm lg:text-base text-primary"
-                            to="/login" state={pathname}>
+                            </span> : showRegisterBtn}</> : <Link
+                                className="font-medium text-sm lg:text-base text-primary"
+                                to="/login" state={pathname}>
                                 Login to see your registration status
                             </Link>
                         }</>

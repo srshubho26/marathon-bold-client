@@ -1,5 +1,5 @@
 import { Label, Select, Textarea, TextInput } from "flowbite-react";
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import useAuth from "../../Provider/useAuth";
@@ -23,6 +23,10 @@ const AddMarathon = () => {
     const { logOut } = useContext(AuthContext);
     const [previewImg, setPreviewImg] = useState('');
     const photoInputRef = useRef();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     const imgPrevVals = {
         photoInputRef,
@@ -78,7 +82,7 @@ const AddMarathon = () => {
         const marathonImg = res.imgUrl;
 
         const data = { title, regStart, regEnd, eventStart, location, marathonImg, distance, description, creatorEmail: email, createdAt: new Date().getTime() };
-        axios.post("http://localhost:5000/add-marathon", data, { withCredentials: true })
+        axios.post("https://a11-server-weld.vercel.app/add-marathon", data, { withCredentials: true })
             .then(res => {
                 if (res.data.acknowledged) {
                     swal("Done", "Your marathon is added successfully.", "success");

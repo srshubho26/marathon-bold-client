@@ -4,10 +4,15 @@ import Loading from "../../components/reusuable/Loading";
 import { GrSchedules } from "react-icons/gr";
 import moment from "moment";
 import useDetails from "../../hooks/useDetails";
+import { useEffect } from "react";
 
 const BlogDetails = () => {
     const { id } = useParams();
     const { details, loading } = useDetails(id, 'blogs');
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return (<section className="pt-10 pb-20 px-2 bg-lite dark:bg-gray-900">
         <Helmet>

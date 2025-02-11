@@ -16,9 +16,13 @@ const MyMarathons = () => {
     const [marathons, setMarathons] = useState(null);
     const [openModal, setOpenModal] = useState(false);
     const [toUpdate, setToUpdate] = useState(null);
+    
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     const loadMyMarathons = useCallback(()=>{
-        axios(`http://localhost:5000/my-marathons?email=${email}`, { withCredentials: true })
+        axios(`https://a11-server-weld.vercel.app/my-marathons?email=${email}`, { withCredentials: true })
             .then(res => {
                 setMarathons(res.data);
                 setLoading(false);
@@ -44,7 +48,7 @@ const MyMarathons = () => {
           .then(isConfirmed => {
             if(!isConfirmed)return;
             setLoading(true);
-            axios.delete(`http://localhost:5000/my-marathons/delete?id=${id}&creatorEmail=${author}`, {withCredentials: true})
+            axios.delete(`https://a11-server-weld.vercel.app/my-marathons/delete?id=${id}&creatorEmail=${author}`, {withCredentials: true})
             .then(res=>{
                 if(res.data.acknowledged){
                     swal("Deleted!", "Your marathon has been deleted!", "success")

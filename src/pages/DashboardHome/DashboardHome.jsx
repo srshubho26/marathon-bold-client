@@ -24,7 +24,11 @@ const DashboardHome = () => {
     const [blogCount, setBlogCount] = useState(0);
 
     useEffect(() => {
-        axios.post("http://localhost:5000/entries-count", { email: user.email }, { withCredentials: true })
+        window.scrollTo(0, 0);
+    }, []);
+
+    useEffect(() => {
+        axios.post("https://a11-server-weld.vercel.app/entries-count", { email: user.email }, { withCredentials: true })
             .then(res => {
                 setMarathonCount(res.data.marathonCount);
                 setApplyCount(res.data.applyCount);

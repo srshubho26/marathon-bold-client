@@ -21,7 +21,7 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
             if (currentUser) {
-                axios.post("http://localhost:5000/jwt", { email: currentUser.email }, { withCredentials: true })
+                axios.post("https://a11-server-weld.vercel.app/jwt", { email: currentUser.email }, { withCredentials: true })
                     .then(() => setLoading(false))
 
             } else {
@@ -56,7 +56,7 @@ const AuthProvider = ({ children }) => {
     const logOut = () => {
         signOut(auth)
             .then(() => {
-                axios.post("http://localhost:5000/logout", {}, { withCredentials: true })
+                axios.post("https://a11-server-weld.vercel.app/logout", {}, { withCredentials: true })
                     .then(() => navigate("/login"))
             })
     }

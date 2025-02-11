@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import useAuth from "../../Provider/useAuth";
 import { AuthContext } from "../../Provider/AuthProvider";
 import axios from "axios";
@@ -17,6 +17,10 @@ const AddBlog = () => {
     const [previewImg, setPreviewImg] = useState('');
     const photoInputRef = useRef();
     const imgPrevVals = { photoInputRef, previewImg, setPreviewImg, className: 'max-w-96 aspect-[3/2]' }
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     const imgInputVals = {
         label: 'Thumbnail',
@@ -42,7 +46,7 @@ const AddBlog = () => {
             const img = res.imgUrl
 
             const data = { title, img, description, author, date: new Date().getTime() };
-            axios.post("http://localhost:5000/add-blog", data, { withCredentials: true })
+            axios.post("https://a11-server-weld.vercel.app/add-blog", data, { withCredentials: true })
                 .then(res => {
                     if (res.data.acknowledged) {
                         swal("Done", "Your blog is added successfully.", "success");

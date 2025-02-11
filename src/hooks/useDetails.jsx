@@ -10,7 +10,7 @@ const useDetails = (id, type = 'marathons') => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios(`http://localhost:5000/${type}/${id}`)
+        axios(`https://a11-server-weld.vercel.app/${type}/${id}`)
             .then(res => {
                 if (Object.keys(res.data).length < 1) {
                     return navigate('/');
