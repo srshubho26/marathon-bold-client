@@ -15,7 +15,7 @@ const Newsletter = () => {
         <TextInput id="email" className="grow" placeholder="Enter your email" required type="email" />
 
         <button type="submit"
-            className="bg-primary-lite hover:bg-primary rounded-md px-4 text-lite font-semibold uppercase">
+            className="hover:bg-primary border border-primary transition-all rounded-md px-4 text-primary hover:text-lite font-semibold uppercase">
             Subscribe
         </button>
     </form>);

@@ -27,7 +27,7 @@ const Footer = () => {
                     <div className="w-full max-w-48">
                         <h3 className="text-title dark:text-lite font-semibold text-2xl mb-5">Useful Links</h3>
 
-                        <FooterLinkGroup col>
+                        <FooterLinkGroup col className="text-base">
                             <Link className="hover:text-primary" to="/home">Home</Link>
                             <Link className="hover:text-primary" to="/marathons">Marathons</Link>
                             {user ? <>
