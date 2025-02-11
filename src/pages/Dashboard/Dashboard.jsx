@@ -20,6 +20,7 @@ const Dashboard = () => {
             >
                 <GoTriangleRight className={isOpen ? "rotate-180" : ""} />
             </button>
+
             <Sidebar className="dark:bg-gray-800">
                 <Sidebar.Items>
                     <h3 className="text-title dark:text-lite uppercase text-2xl font-semibold flex items-center gap-2">
