@@ -11,7 +11,7 @@ const Search = ({ loadData }) => {
         }, 500);
     }
 
-    return (<div className="w-64 ml-auto mb-4 border border-title rounded-md">
+    return (<div className="w-64 ml-auto mb-4">
         <TextInput type="text" placeholder="Search Here" onChange={handleChange} required />
     </div>);
 };

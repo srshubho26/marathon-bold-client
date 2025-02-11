@@ -10,6 +10,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import Loading from "../../components/reusuable/Loading";
 import { GoChecklist } from "react-icons/go";
 import { CiViewList } from "react-icons/ci";
+import { GrArticle } from "react-icons/gr";
 
 const linkClasses = "uppercase text-primary hover:text-lite text-sm xl:text-lg inline-flex items-center gap-2 border border-primary rounded-md px-3 py-1 hover:bg-primary";
 
@@ -18,13 +19,14 @@ const DashboardHome = () => {
     const [loading, setLoading] = useState(true);
     const [marathonCount, setMarathonCount] = useState(0);
     const [applyCount, setApplyCount] = useState(0);
+    const [blogCount, setBlogCount] = useState(0);
 
     useEffect(() => {
         axios.post("http://localhost:5000/entries-count", { email: user.email }, { withCredentials: true })
             .then(res => {
-
                 setMarathonCount(res.data.marathonCount);
                 setApplyCount(res.data.applyCount);
+                setBlogCount(res.data.blogsCount)
                 setLoading(false);
             }).catch(err => {
                 swal("Oops!", "Something went wrong!", "error");
@@ -101,6 +103,38 @@ const DashboardHome = () => {
                                 {applyCount > 0 ? <>
                                     <span className="text-2xl"><GoChecklist /></span>
                                     <span>View Applies</span>
+                                </> : <>
+                                    <span className="text-2xl"><BiRun /></span>
+                                    <span>Marathons</span>
+                                </>}
+
+                            </Link>
+                        </div>
+                    </div>
+                </Card>
+
+                <Card className="max-w-sm" horizontal>
+                    <div className="flex flex-col lg:flex-row gap-5 items-center">
+                        <div className="border border-primary text-primary rounded-full p-8 xl:p-10 text-5xl xl:text-6xl">
+                            <GrArticle />
+                        </div>
+
+                        <div className="text-center lg:text-left">
+                            <h5 className="text-xl xl:text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                {blogCount > 0 ? <><span className="text-primary">{blogCount}</span> Blog{blogCount > 1 ? 's' : ''}</> : "No Blog"}
+
+                            </h5>
+                            <p className="font-normal text-gray-700 mb-5 dark:text-gray-400">
+                                {blogCount > 0 ? "Browse your blogs to view and modify them." : "Add some blogs to create your impact on people"}
+                            </p>
+
+                            <Link
+                                className={linkClasses}
+                                to={blogCount > 0 ? '/dashboard/my-blogs' : '/add-blog'}
+                            >
+                                {blogCount > 0 ? <>
+                                    <span className="text-2xl"><GrArticle /></span>
+                                    <span>View Blogs</span>
                                 </> : <>
                                     <span className="text-2xl"><BiRun /></span>
                                     <span>Marathons</span>

@@ -61,7 +61,7 @@ div.swiper-button-prev{
     object-fit: cover
 }
 
-form input:focus, form textarea:focus{
+input:focus, textarea:focus{
     border-color: #ce0395e9!important;
     box-shadow: none!important;
 }
