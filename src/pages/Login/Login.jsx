@@ -8,6 +8,7 @@ import swal from "sweetalert";
 import Loading from "../../components/reusuable/Loading";
 import { Helmet } from "react-helmet-async";
 import login from '../../assets/img/login.svg';
+import { RiLoginBoxLine } from "react-icons/ri";
 
 const Login = () => {
     const { loginUser, user } = useContext(AuthContext);
@@ -74,8 +75,9 @@ const Login = () => {
                         <TextInput name="pass" type="password" placeholder="Enter your password" required />
                     </div>
 
-                    <button className="w-fit text-primary border border-primary bg-transparent hover:bg-primary-lite font-semibold text-lg rounded-lg px-6 py-2 hover:text-lite uppercase">
-                        Login
+                    <button className="w-fit text-primary border border-primary bg-transparent hover:bg-primary-lite font-semibold text-lg rounded-lg px-5 py-2 hover:text-lite uppercase flex gap-3 items-center">
+                        <span>Login</span>
+                        <RiLoginBoxLine className="text-3xl" />
                     </button>
                 </form>
                 <Label className="text-desc text-sm sm:text-base">

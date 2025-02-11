@@ -70,9 +70,8 @@ const Banner = () => {
                             {slide.desc}
                             </p>
 
-                            <Link to={slide.link.to} className='w-fit border border-lite rounded-md px-5 py-2 text-lite text-lg font-semibold flex items-center gap-1 hover:bg-primary hover:border-primary transition-all mt-5'>
-                            {/* <MdDirectionsRun className='text-4xl' /> */}
-                            <span className='text-4xl'>{slide.link.icon}</span>
+                            <Link to={slide.link.to} className='w-fit border border-lite rounded-md px-5 py-2 text-lite sm:text-lg font-semibold flex items-center gap-1 hover:bg-primary hover:border-primary transition-all mt-5'>
+                            <span className='text-3xl sm:text-4xl'>{slide.link.icon}</span>
                             <span className='tracking-wider'>{slide.link.name}</span>
                             </Link>
                         </div>

@@ -11,6 +11,7 @@ import signup from '../../assets/img/signup.svg';
 import ImgPreview from "../../components/reusuable/ImgPreview";
 import ImageInput from "../../components/reusuable/ImageInput";
 import { uploadImg } from "../../assets/utils";
+import { FiUserPlus } from "react-icons/fi";
 
 const Register = () => {
     const { createNewUser, user } = useContext(AuthContext);
@@ -116,8 +117,9 @@ const Register = () => {
                         <TextInput name="pass" type="password" placeholder="Enter your password" required />
                     </div>
 
-                    <button className="w-fit text-primary border border-primary bg-transparent hover:bg-primary-lite font-semibold text-lg rounded-lg px-6 py-2 hover:text-lite uppercase">
-                        Register
+                    <button className="w-fit text-primary border border-primary bg-transparent hover:bg-primary-lite font-semibold text-lg rounded-lg px-5 py-2 hover:text-lite uppercase flex gap-3 items-center">
+                        <span>Register</span>
+                        <FiUserPlus className="text-3xl" />
                     </button>
                 </form>
                 <Label className="text-desc text-sm sm:text-base">
