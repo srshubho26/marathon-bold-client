@@ -49,7 +49,7 @@ const UpdateBlogModal = ({ loadMyBlogs, openModal, setOpenModal, toUpdate, logOu
 
         const ownerVerify = { id: toUpdate._id, creatorEmail: toUpdate.author.email };
 
-        axios.put("https://a11-server-weld.vercel.app/my-blogs/update", { doc, ownerVerify }, { withCredentials: true })
+        axios.put("http://localhost:5000/my-blogs/update", { doc, ownerVerify }, { withCredentials: true })
             .then(res => {
                 if (res.data.acknowledged) {
                     swal("Success", "Your blog is updated successfully.", "success")

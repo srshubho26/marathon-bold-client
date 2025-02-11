@@ -21,7 +21,7 @@ const Details = () => {
 
     useEffect(() => {
         if (!user) return;
-        axios.post('https://a11-server-weld.vercel.app/is-already-applied', { email: user.email, marathonId: id }, { withCredentials: true })
+        axios.post('http://localhost:5000/is-already-applied', { email: user.email, marathonId: id }, { withCredentials: true })
             .then(res => {
                 if (res.data.registered) setIsApplied(true);
             })

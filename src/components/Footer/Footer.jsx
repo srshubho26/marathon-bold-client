@@ -56,10 +56,10 @@ const Footer = () => {
                         </Link>
                     </p>
                     <div className="mt-4 flex space-x-6 sm:mt-0 justify-center">
-                        <FooterIcon href="#" icon={BsFacebook} />
-                        <FooterIcon href="#" icon={BsInstagram} />
-                        <FooterIcon href="#" icon={BsTwitter} />
-                        <FooterIcon href="#" icon={BsDribbble} />
+                        <FooterIcon href="#" className="hover:text-primary" icon={BsFacebook} />
+                        <FooterIcon href="#" className="hover:text-primary" icon={BsInstagram} />
+                        <FooterIcon href="#" className="hover:text-primary" icon={BsTwitter} />
+                        <FooterIcon href="#" className="hover:text-primary" icon={BsDribbble} />
                     </div>
                 </div>
             </div>

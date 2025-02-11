@@ -1,13 +1,13 @@
 import { Sidebar } from "flowbite-react";
-import { CiViewList } from "react-icons/ci";
 import { GoChecklist, GoTriangleRight } from "react-icons/go";
 
-import { MdDashboard, MdFormatListBulletedAdd } from "react-icons/md";
+import { MdDashboard, MdFormatListBulletedAdd, MdOutlineArticle } from "react-icons/md";
 import { VscDiffAdded } from "react-icons/vsc";
 import SidebarItem from "./dashboardParts/SidebarItem";
 import { Outlet } from "react-router-dom";
 import { useState } from "react";
 import { IoHomeOutline } from "react-icons/io5";
+import { GrArticle } from "react-icons/gr";
 
 const Dashboard = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -34,9 +34,9 @@ const Dashboard = () => {
 
                         <SidebarItem icon={MdFormatListBulletedAdd} name="Add Blog" to="/dashboard/add-blog" />
 
-                        <SidebarItem icon={CiViewList} name="My Marathons" to="/dashboard/my-marathons" />
+                        <SidebarItem icon={MdOutlineArticle} name="My Marathons" to="/dashboard/my-marathons" />
 
-                        <SidebarItem icon={CiViewList} name="My Blogs" to="/dashboard/my-blogs" />
+                        <SidebarItem icon={GrArticle} name="My Blogs" to="/dashboard/my-blogs" />
 
                         <SidebarItem icon={GoChecklist} name="My Applies" to="/dashboard/my-applies" />
                     </Sidebar.ItemGroup>

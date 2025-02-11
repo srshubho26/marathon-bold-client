@@ -42,7 +42,7 @@ const AddBlog = () => {
             const img = res.imgUrl
 
             const data = { title, img, description, author, date: new Date().getTime() };
-            axios.post("https://a11-server-weld.vercel.app/add-blog", data, { withCredentials: true })
+            axios.post("http://localhost:5000/add-blog", data, { withCredentials: true })
                 .then(res => {
                     if (res.data.acknowledged) {
                         swal("Done", "Your blog is added successfully.", "success");

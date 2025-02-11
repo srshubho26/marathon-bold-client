@@ -18,7 +18,7 @@ const Apply = () => {
 
     useEffect(() => {
         const asyncEffect = async()=>{
-            axios.post(`https://a11-server-weld.vercel.app/marathons/${id}`, { email: user.email }, { withCredentials: true })
+            axios.post(`http://localhost:5000/marathons/${id}`, { email: user.email }, { withCredentials: true })
                 .then(res => {
                     const data = res.data;
                     const today = new Date().getTime();
@@ -65,7 +65,7 @@ const Apply = () => {
 
         const forMarathonUpdate = { totalReg: marathonData.totalRegCount, id: marathonData._id }
 
-        axios.post("https://a11-server-weld.vercel.app/marathon-apply", { applyData, forMarathonUpdate }, { withCredentials: true })
+        axios.post("http://localhost:5000/marathon-apply", { applyData, forMarathonUpdate }, { withCredentials: true })
             .then(res => {
                 if (res.data.acknowledged) {
                     swal("Done", "Your registration is completed.", "success")

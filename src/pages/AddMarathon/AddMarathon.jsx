@@ -78,7 +78,7 @@ const AddMarathon = () => {
         const marathonImg = res.imgUrl;
 
         const data = { title, regStart, regEnd, eventStart, location, marathonImg, distance, description, creatorEmail: email, createdAt: new Date().getTime() };
-        axios.post("https://a11-server-weld.vercel.app/add-marathon", data, { withCredentials: true })
+        axios.post("http://localhost:5000/add-marathon", data, { withCredentials: true })
             .then(res => {
                 if (res.data.acknowledged) {
                     swal("Done", "Your marathon is added successfully.", "success");
