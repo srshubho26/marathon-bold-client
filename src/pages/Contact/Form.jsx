@@ -1,6 +1,7 @@
 import { Label, Textarea, TextInput } from "flowbite-react";
 import swal from "sweetalert";
 import useAuth from "../../Provider/useAuth";
+import { LuSend } from "react-icons/lu";
 
 const Form = () => {
     const {email} = useAuth() || {};
@@ -14,7 +15,7 @@ const Form = () => {
             })
     }
 
-    return (<form onSubmit={handleSubmit} className="w-full border border-desc px-4 rounded-md">
+    return (<form onSubmit={handleSubmit} className="w-full border border-desc p-4 rounded-md">
         <div className="mb-6 mt-3">
             <Label htmlFor="email" className="mb-2 text-lg block">
                 Your Email
@@ -36,8 +37,9 @@ const Form = () => {
             <Textarea id="message" name="message" placeholder="Tell us what ever on your mind" rows={8} required />
         </div>
         <div className="mb-6">
-            <button className=" text-primary border border-primary bg-transparent hover:bg-primary-lite font-semibold text-lg rounded-md px-6 py-2 hover:text-lite uppercase">
-                Send message
+            <button className=" text-primary border border-primary bg-transparent hover:bg-primary-lite font-semibold text-lg rounded-md px-6 py-2 hover:text-lite uppercase flex gap-2 items-center">
+                <span>Send message</span>
+                <LuSend className="text-3xl" />
             </button>
         </div>
     </form>);
